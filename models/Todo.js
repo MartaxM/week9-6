@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 let TodoSchema = new Schema({
    user:{type: mongoose.ObjectId},
-   items: [{type: String}]
+   items: [String]
 });
 
 module.exports = mongoose.model("todos", TodoSchema);
