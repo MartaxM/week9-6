@@ -104,7 +104,7 @@ router.post('/api/todos', validateToken, (req, res) => {
     } else {
       Todo.create(
         {
-          user: req.user.id,
+          user: mongoose.Types.ObjectId(req.user.id),
           items: req.body.items
         }, (err, ok) => {
           if (err) throw err;
