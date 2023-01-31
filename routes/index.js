@@ -100,7 +100,12 @@ router.post('/api/todos', validateToken, (req, res) => {
   Todo.findOne({ user: mongoose.Types.ObjectId(req.user.id) }, (err, todo) => {
     if (err) throw err;
     if (todo) {
-      Todo.updateOne({user: mongoose.Types.ObjectId(req.user.id)}, { $push: { items: { $each: req.body.items }} });
+      Todo.updateOne(
+        { user: mongoose.Types.ObjectId(req.user.id) }, { $push: { items: { $each: req.body.items } } },
+        (err, todo) => {
+          if (err) throw err;
+          return res.sendStatus(200);
+        });
     } else {
       Todo.create(
         {
